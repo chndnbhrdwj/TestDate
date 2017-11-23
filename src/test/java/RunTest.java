@@ -7,9 +7,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 
 public class RunTest {
@@ -22,11 +20,10 @@ public class RunTest {
 
     @BeforeClass
     public void setup() throws IOException {
-        InputStream input = new FileInputStream("config.properties");
-        prop.load(input);
+        prop.load(new FileInputStream("config.properties"));
         license = prop.getProperty("license");
         reference = prop.getProperty("reference");
-        System.setProperty("webdriver.chrome.driver", "/Users/kumacham/development/scripts/chromedriver");
+        System.setProperty("webdriver.chrome.driver", prop.getProperty("chrome"));
         driver = new ChromeDriver();
     }
 
